@@ -17,9 +17,9 @@ label {
   margin-bottom: 10px;
 }
 
-.address {
+/*.address {
   margin-top: 10px;
-}
+}*/
 
 .container {
   max-width: 600px;
@@ -109,6 +109,30 @@ button:hover {
 .create-employee-error {
   color: red;
   font-size: 13px;
+}
+
+.create-employee-form {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+}
+
+.create-employee-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.create-employee-address {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.create-employee-button {
+  margin-top: auto;
 }
 
 .datatable-root {

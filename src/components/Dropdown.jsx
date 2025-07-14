@@ -20,8 +20,8 @@ export default function Dropdown({ options, value, onChange, name, id, label }) 
   const selected = normalized.find(opt => opt.value === value) || null;
 
   return (
-    <div style={{marginBottom: '1rem'}}>
-      {label && <label htmlFor={id} style={{display:'block',marginBottom:6}}>{label}</label>}
+    <div>
+      {label && <label htmlFor={id}>{label}</label>}
       <Select
         inputId={id}
         name={name}
