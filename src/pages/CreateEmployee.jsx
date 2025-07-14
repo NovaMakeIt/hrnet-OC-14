@@ -5,13 +5,9 @@ import { Link } from 'react-router-dom';
 import DatePicker from '../components/DatePicker';
 import Dropdown from '../components/Dropdown';
 import Modal from '../components/Modal';
+import { states } from '../data/states';
 
 const departments = ['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'];
-const states = [
-  { name: 'Alabama', abbreviation: 'AL' },
-  { name: 'Alaska', abbreviation: 'AK' },
-  // ... à compléter avec toutes les US states
-];
 
 export default function CreateEmployee() {
   const dispatch = useDispatch();
