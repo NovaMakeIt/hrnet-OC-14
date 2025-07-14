@@ -94,11 +94,13 @@ export default function CreateEmployee() {
           {errors.lastName && <div style={{color: 'red', fontSize: 13}}>{errors.lastName}</div>}
 
           <label htmlFor="date-of-birth">Date of Birth</label>
+          {/* Limite la date de naissance à aujourd'hui */}
           <DatePicker
             name="dateOfBirth"
             id="date-of-birth"
             value={form.dateOfBirth}
             onChange={val => setForm(f => ({ ...f, dateOfBirth: val }))}
+            max="today"
           />
           {errors.dateOfBirth && <div style={{color: 'red', fontSize: 13}}>{errors.dateOfBirth}</div>}
 

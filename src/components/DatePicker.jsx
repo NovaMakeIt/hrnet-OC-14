@@ -1,17 +1,35 @@
 import React from 'react';
 
 /**
- * DatePicker React (format MM/DD/YYYY, sans timepicker)
- * Props : value (string), onChange (fn), name (string), id (string)
+ * DatePicker React (format MM/DD/YYYY ou YYYY-MM-DD, sans timepicker)
+ * Props :
+ *   value (string), onChange (fn), name (string), id (string)
+ *   min (string, optionnel), max (string, optionnel)
+ *   className (string, optionnel), style (object, optionnel)
+ *   ...props (autres props input)
+ *
+ * Le style par défaut est width: '100%', mais peut être surchargé par la prop style.
+ * Toute classe CSS passée via className est appliquée à l'input.
  */
-export default function DatePicker({ value, onChange, name, id }) {
-  // Convertit le format MM/DD/YYYY <-> YYYY-MM-DD pour l'input type="date"
+const defaultStyle = { width: '100%' };
+
+export default function DatePicker({ value, onChange, name, id, min, max, className, style, ...props }) {
+  // Convertit MM/DD/YYYY ou YYYY-MM-DD -> YYYY-MM-DD pour l'input
   function toInputValue(val) {
     if (!val) return '';
-    const [mm, dd, yyyy] = val.split('/');
-    if (!mm || !dd || !yyyy) return '';
-    return `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
+    if (val === 'today') {
+      const today = new Date();
+      return `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    }
+    if (val.includes('/')) {
+      const [mm, dd, yyyy] = val.split('/');
+      if (!mm || !dd || !yyyy) return '';
+      return `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
+    }
+    // Si déjà au format YYYY-MM-DD
+    return val;
   }
+  // Convertit YYYY-MM-DD -> MM/DD/YYYY pour l'app
   function fromInputValue(val) {
     if (!val) return '';
     const [yyyy, mm, dd] = val.split('-');
@@ -26,8 +44,12 @@ export default function DatePicker({ value, onChange, name, id }) {
       id={id}
       value={toInputValue(value)}
       onChange={e => onChange(fromInputValue(e.target.value))}
-      pattern="\d{4}-\d{2}-\d{2}"
-      style={{width:'100%'}}
+      min={toInputValue(min)}
+      max={toInputValue(max)}
+      className={className}
+      style={{ ...defaultStyle, ...style }}
+      {...props}
     />
   );
 }
+
