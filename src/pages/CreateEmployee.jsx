@@ -53,17 +53,10 @@ export default function CreateEmployee() {
       <div className="title">
         <h1>HRnet</h1>
       </div>
-      <nav style={{display:'flex',gap:24,justifyContent:'center',margin:'2rem 0'}}>
+      <nav className="create-employee-nav">
         <Link
           to="/employees"
-          style={{
-            background: '#1976d2',
-            color: '#fff',
-            padding: '0.5rem 1rem',
-            borderRadius: 4,
-            textDecoration: 'none',
-            alignSelf: 'flex-start'
-          }}
+          className="create-employee-link"
         >
           View Current Employees
         </Link>
@@ -80,7 +73,7 @@ export default function CreateEmployee() {
             required
             onKeyDown={e => { if (/\d/.test(e.key)) e.preventDefault(); }}
           />
-          {errors.firstName && <div style={{color: 'red', fontSize: 13}}>{errors.firstName}</div>}
+          {errors.firstName && <div className="create-employee-error">{errors.firstName}</div>}
 
           <label htmlFor="last-name">Last Name</label>
           <input
@@ -91,7 +84,7 @@ export default function CreateEmployee() {
             required
             onKeyDown={e => { if (/\d/.test(e.key)) e.preventDefault(); }}
           />
-          {errors.lastName && <div style={{color: 'red', fontSize: 13}}>{errors.lastName}</div>}
+          {errors.lastName && <div className="create-employee-error">{errors.lastName}</div>}
 
           <label htmlFor="date-of-birth">Date of Birth</label>
           {/* Limite la date de naissance à aujourd'hui */}
@@ -102,7 +95,7 @@ export default function CreateEmployee() {
             onChange={val => setForm(f => ({ ...f, dateOfBirth: val }))}
             max="today"
           />
-          {errors.dateOfBirth && <div style={{color: 'red', fontSize: 13}}>{errors.dateOfBirth}</div>}
+          {errors.dateOfBirth && <div className="create-employee-error">{errors.dateOfBirth}</div>}
 
           <label htmlFor="start-date">Start Date</label>
           <DatePicker
@@ -111,16 +104,16 @@ export default function CreateEmployee() {
             value={form.startDate}
             onChange={val => setForm(f => ({ ...f, startDate: val }))}
           />
-          {errors.startDate && <div style={{color: 'red', fontSize: 13}}>{errors.startDate}</div>}
+          {errors.startDate && <div className="create-employee-error">{errors.startDate}</div>}
 
           <div className="address">
             <label htmlFor="street">Street</label>
             <input name="street" id="street" value={form.street} onChange={handleChange} required />
-            {errors.street && <div style={{color: 'red', fontSize: 13}}>{errors.street}</div>}
+            {errors.street && <div className="create-employee-error">{errors.street}</div>}
 
             <label htmlFor="city">City</label>
             <input name="city" id="city" value={form.city} onChange={handleChange} required onKeyDown={e => { if (/\d/.test(e.key)) e.preventDefault(); }} />
-            {errors.city && <div style={{color: 'red', fontSize: 13}}>{errors.city}</div>}
+            {errors.city && <div className="create-employee-error">{errors.city}</div>}
 
             <Dropdown
               name="state"
@@ -130,11 +123,11 @@ export default function CreateEmployee() {
               value={form.state}
               onChange={val => setForm(f => ({ ...f, state: val }))}
             />
-            {errors.state && <div style={{color: 'red', fontSize: 13}}>{errors.state}</div>}
+            {errors.state && <div className="create-employee-error">{errors.state}</div>}
 
             <label htmlFor="zip-code">Zip Code</label>
             <input name="zipCode" id="zip-code" value={form.zipCode} onChange={handleChange} required />
-            {errors.zipCode && <div style={{color: 'red', fontSize: 13}}>{errors.zipCode}</div>}
+            {errors.zipCode && <div className="create-employee-error">{errors.zipCode}</div>}
           </div>
 
           <Dropdown
@@ -145,7 +138,7 @@ export default function CreateEmployee() {
             value={form.department}
             onChange={val => setForm(f => ({ ...f, department: val }))}
           />
-          {errors.department && <div style={{color: 'red', fontSize: 13}}>{errors.department}</div>}
+          {errors.department && <div className="create-employee-error">{errors.department}</div>}
 
           <button type="submit">Save</button>
         </form>

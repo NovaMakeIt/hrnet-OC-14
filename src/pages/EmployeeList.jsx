@@ -23,12 +23,12 @@ export default function EmployeeList() {
     console.log('structure premier employé:', employees[0]);
   }
   return (
-    <div className="container" style={{maxWidth:'1000px'}}>
-      <Link to="/" style={{background:'#1976d2',color:'#fff',padding:'0.5rem 1rem',borderRadius:4,textDecoration:'none',marginRight:16,alignSelf:'flex-start'}}>← Back</Link>
-      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'1.5rem'}}>
-        <h2 style={{margin:0}}>Employee List</h2>
+    <div className="container employee-list-maxwidth1000">
+      <Link to="/" className="employee-list-back">← Back</Link>
+      <div className="employee-list-headerflex">
+        <h2 className="employee-list-title">Current Employees</h2>
       </div>
-      <p style={{color:'#1976d2',fontWeight:500,marginBottom:8}}>{employees.length} employé(s) enregistré(s)</p>
+      <p className="employee-list-count">{employees.length} employé(s) enregistré(s)</p>
       <DataTable columns={columns} data={employees} />
     </div>
   );

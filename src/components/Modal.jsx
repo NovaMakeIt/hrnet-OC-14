@@ -45,7 +45,7 @@ export default function Modal({ isOpen, onRequestClose, children }) {
       ariaHideApp={true}
     >
       {children}
-      <button onClick={onRequestClose} style={{marginTop:'1.5rem'}}>Close</button>
+      <button onClick={onRequestClose}>Close</button>
     </ReactModal>
   );
 }
