@@ -11,7 +11,7 @@ import Select from 'react-select';
  *   - id : string
  *   - label : string (optionnel)
  */
-export default function Dropdown({ options, value, onChange, name, id, label }) {
+export default function Dropdown({ options, value, onChange, name, id, label, menuListMaxHeight }) {
   // Normalise options (string[] ou [{ value, label }])
   const normalized = options.map(opt =>
     typeof opt === 'string' ? { value: opt, label: opt } : opt
@@ -30,7 +30,15 @@ export default function Dropdown({ options, value, onChange, name, id, label }) 
         onChange={option => onChange(option ? option.value : '')}
         isClearable
         placeholder="-- Select --"
-        styles={{
+        styles={menuListMaxHeight ? {
+          menuList: (provided) => ({
+            ...provided,
+            maxHeight: menuListMaxHeight,
+            overflowY: 'auto',
+          }),
+          container: base => ({ ...base, width: '100%' }),
+          menu: base => ({ ...base, zIndex: 9999 }),
+        } : {
           container: base => ({ ...base, width: '100%' }),
           menu: base => ({ ...base, zIndex: 9999 }),
         }}

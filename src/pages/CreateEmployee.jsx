@@ -113,6 +113,7 @@ export default function CreateEmployee() {
             options={departments}
             value={form.department}
             onChange={val => setForm(f => ({ ...f, department: val }))}
+            menuListMaxHeight={100}
             />
             {errors.department && <div className="create-employee-error">{errors.department}</div>}
           </div>
