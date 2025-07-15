@@ -40,39 +40,64 @@ export default function DataTable({ columns, data }) {
           className="datatable-search"
         />
       </div>
-      <table className="datatable-table">
-        <thead>
-        {table.getHeaderGroups().map(headerGroup => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map(header => (
-              <th
-                key={header.id}
-                className={`datatable-th ${header.column.getCanSort() ? 'datatable-th-sortable' : 'datatable-th-not-sortable'}`}
-                onClick={header.column.getToggleSortingHandler()}
-              >
-                {flexRender(header.column.columnDef.header, header.getContext())}
-                {header.column.getIsSorted() === 'asc' ? ' ▲' : header.column.getIsSorted() === 'desc' ? ' ▼' : ''}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.length === 0 ? (
-          <tr><td colSpan={columns.length} className="datatable-empty">No data</td></tr>
-        ) : (
-          table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id} className="datatable-td">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+      {/* Table classique desktop */}
+      <div className="datatable-table-wrapper">
+        <table className="datatable-table">
+          <thead>
+          {table.getHeaderGroups().map(headerGroup => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map(header => (
+                <th
+                  key={header.id}
+                  className={`datatable-th ${header.column.getCanSort() ? 'datatable-th-sortable' : 'datatable-th-not-sortable'}`}
+                  onClick={header.column.getToggleSortingHandler()}
+                >
+                  {flexRender(header.column.columnDef.header, header.getContext())}
+                  {header.column.getIsSorted() === 'asc' ? ' ▲' : header.column.getIsSorted() === 'desc' ? ' ▼' : ''}
+                </th>
               ))}
             </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.length === 0 ? (
+            <tr><td colSpan={columns.length} className="datatable-empty">No data</td></tr>
+          ) : (
+            table.getRowModel().rows.map(row => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map(cell => (
+                  <td key={cell.id} className="datatable-td">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))
+          )}
+        </tbody>
+        </table>
+      </div>
+
+      {/* Vue mobile carte sous 600px */}
+      <div className="datatable-cards">
+        {table.getRowModel().rows.length === 0 ? (
+          <div className="datatable-empty">No data</div>
+        ) : (
+          table.getRowModel().rows.map(row => (
+            <div className="datatable-card" key={row.id}>
+              {row.getVisibleCells().map((cell, idx) => (
+                <div className="datatable-card-row" key={cell.id}>
+                  <span className="datatable-card-label">
+                    {flexRender(table.getAllColumns()[idx].columnDef.header, cell.getContext())}
+                  </span>
+                  <span className="datatable-card-value">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </span>
+                </div>
+              ))}
+            </div>
           ))
         )}
-      </tbody>
-    </table>
+      </div>
       <div className="datatable-pagination">
         <button
           onClick={() => table.previousPage()}
