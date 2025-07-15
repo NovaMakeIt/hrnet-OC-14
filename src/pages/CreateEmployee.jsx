@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addEmployee } from '../store/employeesSlice';
 import { Link } from 'react-router-dom';
-import DatePicker from '../components/DatePicker';
+/*import DatePicker from '../components/DatePicker';*/
+import DatePicker from 'react-datepicker-simple-tlb';
 import Dropdown from '../components/Dropdown';
 import Modal from '../components/Modal';
 import { states } from '../data/states';
